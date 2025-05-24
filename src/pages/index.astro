@@ -2,15 +2,82 @@
 
 ---
 
-<html lang="en">
+<html lang="ja">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>My Blog - ヒーローイメージ自動生成機能付きブログ</title>
+		<meta name="description" content="Astro + Satori + Sharp を使ったヒーローイメージ自動生成機能付きブログ" />
 	</head>
-	<body>
-		<h1>Astro</h1>
+	<body class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+		<div class="container mx-auto px-4 py-16">
+			<div class="text-center max-w-4xl mx-auto">
+				<h1 class="text-6xl font-bold text-gray-900 mb-6">
+					My Blog
+				</h1>
+				<p class="text-xl text-gray-600 mb-8">
+					ヒーローイメージ自動生成機能付きのモダンブログ
+				</p>
+				<p class="text-lg text-gray-500 mb-12">
+					Astro + Satori + Sharp を使って、記事のタイトルとカテゴリから美しいヒーローイメージを自動生成します
+				</p>
+				
+				<div class="flex flex-col sm:flex-row gap-4 justify-center">
+					<a 
+						href="/blog" 
+						class="inline-flex items-center px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors shadow-lg"
+					>
+						ブログを見る
+						<svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+						</svg>
+					</a>
+					<a 
+						href="https://github.com" 
+						class="inline-flex items-center px-8 py-3 bg-gray-800 text-white font-semibold rounded-lg hover:bg-gray-900 transition-colors shadow-lg"
+					>
+						GitHub
+						<svg class="ml-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+							<path fill-rule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z" clip-rule="evenodd"></path>
+						</svg>
+					</a>
+				</div>
+			</div>
+			
+			<!-- 機能説明 -->
+			<div class="mt-20 grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+				<div class="bg-white p-6 rounded-lg shadow-lg">
+					<div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+						<svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+						</svg>
+					</div>
+					<h3 class="text-xl font-semibold text-gray-900 mb-2">自動画像生成</h3>
+					<p class="text-gray-600">記事のタイトルとカテゴリから美しいヒーローイメージを自動生成します。</p>
+				</div>
+				
+				<div class="bg-white p-6 rounded-lg shadow-lg">
+					<div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+						<svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+						</svg>
+					</div>
+					<h3 class="text-xl font-semibold text-gray-900 mb-2">高速ビルド</h3>
+					<p class="text-gray-600">Astroの静的サイト生成により、高速なビルドとパフォーマンスを実現。</p>
+				</div>
+				
+				<div class="bg-white p-6 rounded-lg shadow-lg">
+					<div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+						<svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+						</svg>
+					</div>
+					<h3 class="text-xl font-semibold text-gray-900 mb-2">モダン技術</h3>
+					<p class="text-gray-600">Satori、Sharp、TypeScriptなど最新技術を活用したモダンな構成。</p>
+				</div>
+			</div>
+		</div>
 	</body>
 </html>

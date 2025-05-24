@@ -4,13 +4,16 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "bun run prebuild:images && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "prebuild:images": "bun run scripts/prebuild-hero-images.ts"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.7",
     "astro": "^5.8.0",
+    "satori": "^0.13.1",
+    "sharp": "^0.34.2",
     "tailwindcss": "^4.1.7"
   },
   "devDependencies": {
