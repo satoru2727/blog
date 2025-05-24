@@ -7,10 +7,11 @@ import '../styles/global.css';
 const posts = await getCollection('blog');
 
 // 各投稿のヒーローイメージを処理
-const processedPosts = posts.map((post) => {
-  const heroImage = processHeroImage({
+const processedPosts = await Promise.all(posts.map(async (post) => {
+  const heroImage = await processHeroImage({
     title: post.data.title,
     category: post.data.category,
+    slug: post.slug,
     heroImage: post.data.heroImage,
   });
   
@@ -21,7 +22,7 @@ const processedPosts = posts.map((post) => {
       heroImage,
     }
   };
-});
+}));
 
 // 日付順にソート
 const sortedPosts = processedPosts.sort((a, b) => 

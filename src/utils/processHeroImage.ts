@@ -1,5 +1,6 @@
 import { existsSync } from 'fs';
 import { join } from 'path';
+import { generateHeroImage } from './generateHeroImage'; // generateHeroImage をインポート
 
 interface BlogPost {
   title: string;
@@ -8,7 +9,7 @@ interface BlogPost {
   heroImage?: string;
 }
 
-export function processHeroImage(post: BlogPost): string {
+export async function processHeroImage(post: BlogPost): Promise<string> {
   // heroImageが既に設定されている場合はそれを使用
   if (post.heroImage) {
     return post.heroImage;
@@ -24,7 +25,18 @@ export function processHeroImage(post: BlogPost): string {
     return `/images/hero/${filename}`;
   }
 
-  // フォールバック：デフォルト画像を返すか、空文字を返す
-  console.warn(`Warning: No hero image found for post "${post.slug}". Run "bun run prebuild:images" to generate hero images.`);
-  return '';
+  // 画像を生成
+  try {
+    const generatedImage = await generateHeroImage({
+      title: post.title,
+      category: post.category,
+      slug: post.slug,
+    });
+    return generatedImage;
+  } catch (error) {
+    console.error(`Error generating hero image for post "${post.slug}":`, error);
+    // フォールバック：空文字を返す
+    console.warn(`Warning: No hero image found or generated for post "${post.slug}".`);
+    return '';
+  }
 }

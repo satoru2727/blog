@@ -6,8 +6,8 @@ export async function getStaticPaths() {
   const posts = await getCollection('blog');
   
   // 各投稿のヒーローイメージを処理
-  const processedPosts = posts.map((post) => {
-    const heroImage = processHeroImage({
+  const processedPosts = await Promise.all(posts.map(async (post) => {
+    const heroImage = await processHeroImage({
       title: post.data.title,
       category: post.data.category,
       slug: post.slug,
@@ -26,7 +26,7 @@ export async function getStaticPaths() {
         }
       },
     };
-  });
+  }));
 
   return processedPosts;
 }
