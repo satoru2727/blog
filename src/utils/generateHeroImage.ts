@@ -6,12 +6,13 @@ import { join } from 'path';
 interface GenerateImageOptions {
   title: string;
   category: string;
+  slug: string;
   width?: number;
   height?: number;
 }
 
 export async function generateHeroImage(options: GenerateImageOptions): Promise<string> {
-  const { title, category, width = 1200, height = 630 } = options;
+  const { title, category, slug, width = 1200, height = 630 } = options;
   
   // カテゴリごとの色設定
   const categoryColors: Record<string, { bg: string; gradient: string; accent: string }> = {
@@ -120,12 +121,8 @@ export async function generateHeroImage(options: GenerateImageOptions): Promise<
     .png()
     .toBuffer();
 
-  // ファイル名を生成（タイトルをベースに）
-  const filename = `hero-${title.toLowerCase()
-    .replace(/[^a-z0-9]/g, '-')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '')
-    .substring(0, 50)}.png`;
+  // ファイル名を生成（slugをベースに）
+  const filename = `hero-${slug}.png`;
 
   // public/images/hero/ ディレクトリに保存
   const outputPath = join(process.cwd(), 'public/images/hero', filename);
