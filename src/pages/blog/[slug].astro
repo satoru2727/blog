@@ -1,17 +1,21 @@
 ---
 import { getCollection } from 'astro:content';
-import { processHeroImage } from '../../utils/processHeroImage';
+import { processOgpImage } from '../../utils/processOgpImage'; // Updated import
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
   
-  // 各投稿のヒーローイメージを処理
+  // 各投稿のOGPイメージを処理 (Process OGP image for each post)
   const processedPosts = await Promise.all(posts.map(async (post) => {
-    const heroImage = await processHeroImage({
-      title: post.data.title,
-      category: post.data.category,
+    const ogpImage = await processOgpImage({ // Call processOgpImage, rename variable
       slug: post.slug,
-      heroImage: post.data.heroImage,
+      ogpImage: post.data.ogpImage, // Pass ogpImage from frontmatter
+      heroImage: post.data.heroImage, // Pass heroImage for fallback
+      // title and category are not strictly needed by processOgpImage, 
+      // but keeping them if other parts of your build might expect them indirectly.
+      // If not, they can be removed here.
+      title: post.data.title, 
+      category: post.data.category,
     });
     
     return {
@@ -21,7 +25,7 @@ export async function getStaticPaths() {
           ...post,
           data: {
             ...post.data,
-            heroImage,
+            ogpImage, // Set ogpImage in props
           }
         }
       },
@@ -47,23 +51,23 @@ const { Content } = await post.render();
     <!-- OGP meta tags -->
     <meta property="og:title" content={post.data.title} />
     {post.data.description && <meta property="og:description" content={post.data.description} />}
-    {post.data.heroImage && <meta property="og:image" content={new URL(post.data.heroImage, Astro.url).href} />}
+    {post.data.ogpImage && <meta property="og:image" content={new URL(post.data.ogpImage, Astro.url).href} />} {/* Use ogpImage */}
     <meta property="og:type" content="article" />
   </head>
   <body class="min-h-screen bg-gray-50">
     <article class="max-w-4xl mx-auto py-8 px-4">
-      <!-- ヒーローイメージ -->
-      {post.data.heroImage && (
+      <!-- OGPイメージ (OGP Image) -->
+      {post.data.ogpImage && ( /* Use ogpImage */
         <div class="mb-8 rounded-lg overflow-hidden shadow-lg">
           <img 
-            src={post.data.heroImage} 
+            src={post.data.ogpImage} /* Use ogpImage */
             alt={post.data.title}
             class="w-full h-64 sm:h-80 object-cover"
           />
         </div>
       )}
       
-      <!-- メタ情報 -->
+      <!-- メタ情報 (Meta information) -->
       <header class="mb-8">
         <div class="flex items-center gap-4 mb-4">
           <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
@@ -84,7 +88,7 @@ const { Content } = await post.render();
           </p>
         )}
         
-        <!-- タグ -->
+        <!-- タグ (Tags) -->
         {post.data.tags && (
           <div class="flex flex-wrap gap-2">
             {post.data.tags.map((tag: string) => (
@@ -96,7 +100,7 @@ const { Content } = await post.render();
         )}
       </header>
       
-      <!-- コンテンツ -->
+      <!-- コンテンツ (Content) -->
       <div class="prose prose-lg max-w-none">
         <Content />
       </div>

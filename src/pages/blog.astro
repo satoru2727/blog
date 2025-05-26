@@ -1,30 +1,32 @@
 ---
 import { getCollection } from 'astro:content';
-import { processHeroImage } from '../utils/processHeroImage';
+import { processOgpImage } from '../utils/processOgpImage'; // Updated import
 import BlogCard from '../components/BlogCard.astro';
 import '../styles/global.css';
 
 const posts = await getCollection('blog');
 
-// 各投稿のヒーローイメージを処理
+// 各投稿のOGPイメージを処理 (Process OGP image for each post)
 const processedPosts = await Promise.all(posts.map(async (post) => {
-  const heroImage = await processHeroImage({
+  const ogpImage = await processOgpImage({ // Call processOgpImage, rename variable
+    slug: post.slug,
+    ogpImage: post.data.ogpImage, // Pass ogpImage from frontmatter
+    heroImage: post.data.heroImage, // Pass heroImage for fallback
+    // title and category are not strictly needed by processOgpImage
     title: post.data.title,
     category: post.data.category,
-    slug: post.slug,
-    heroImage: post.data.heroImage,
   });
   
   return {
     ...post,
     data: {
       ...post.data,
-      heroImage,
+      ogpImage, // Set ogpImage in data
     }
   };
 }));
 
-// 日付順にソート
+// 日付順にソート (Sort by date)
 const sortedPosts = processedPosts.sort((a, b) => 
   new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
 );
@@ -58,7 +60,7 @@ const sortedPosts = processedPosts.sort((a, b) =>
             category={post.data.category}
             tags={post.data.tags}
             pubDate={post.data.pubDate}
-            heroImage={post.data.heroImage}
+            ogpImage={post.data.ogpImage} /* Use ogpImage prop */
             slug={post.slug}
           />
         ))}

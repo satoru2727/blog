@@ -5,7 +5,7 @@ export interface Props {
   category: string;
   tags?: string[];
   pubDate: Date;
-  heroImage?: string;
+  ogpImage?: string; // Changed from heroImage to ogpImage
   slug: string;
   isNew?: boolean;
   size?: 'sm' | 'md' | 'lg';
@@ -18,24 +18,24 @@ const {
   category, 
   tags = [], 
   pubDate, 
-  heroImage, 
+  ogpImage, // Changed from heroImage to ogpImage
   slug,
   isNew = false,
   size = 'md',
   orientation = 'vertical'
 } = Astro.props;
 
-// 日付が7日以内の場合は新着とする
+// 日付が7日以内の場合は新着とする (If the date is within 7 days, it is considered new)
 const isNewPost = isNew || (new Date().getTime() - pubDate.getTime()) < 7 * 24 * 60 * 60 * 1000;
 
-// サイズに応じたクラス
+// サイズに応じたクラス (Classes based on size)
 const sizeClasses = {
   sm: 'w-80',
   md: 'w-96',
   lg: 'w-[28rem]'
 };
 
-// 水平レイアウトのクラス
+// 水平レイアウトのクラス (Horizontal layout classes)
 const horizontalClasses = orientation === 'horizontal' 
   ? 'card-side max-w-2xl' 
   : '';
@@ -45,9 +45,9 @@ const cardClasses = `card bg-base-100 ${sizeClasses[size]} ${horizontalClasses} 
 
 <div class={cardClasses}>
   <figure class={orientation === 'horizontal' ? 'w-48 min-w-48' : 'aspect-video overflow-hidden'}>
-    {heroImage ? (
+    {ogpImage ? ( /* Changed from heroImage to ogpImage */
       <img
-        src={heroImage}
+        src={ogpImage} /* Changed from heroImage to ogpImage */
         alt={title}
         class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
       />

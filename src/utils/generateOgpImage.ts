@@ -1,9 +1,10 @@
 import satori from 'satori';
 import sharp from 'sharp';
 import { readFileSync } from 'fs';
-import { join } from 'path';
+import fs from 'fs/promises'; // Added for mkdir
+import path, { join } from 'path'; // Ensure path is imported if used for dirname
 
-interface GenerateImageOptions {
+interface GenerateOgpImageOptions { // Renamed interface
   title: string;
   category: string;
   slug: string;
@@ -11,10 +12,17 @@ interface GenerateImageOptions {
   height?: number;
 }
 
-export async function generateHeroImage(options: GenerateImageOptions): Promise<string> {
-  const { title, category, slug, width = 1200, height = 630 } = options;
+interface RenderOgpImageOptions { // Renamed interface
+  title: string;
+  category: string;
+  width?: number;
+  height?: number;
+}
+
+export async function renderOgpImageBuffer(options: RenderOgpImageOptions): Promise<ArrayBuffer> { // Renamed function
+  const { title, category, width = 1200, height = 630 } = options;
   
-  // カテゴリごとの色設定
+  // カテゴリごとの色設定 (Category color settings - comment can remain or be updated if desired)
   const categoryColors: Record<string, { bg: string; gradient: string; accent: string }> = {
     tech: { bg: '#1e293b', gradient: '#334155', accent: '#3b82f6' },
     blog: { bg: '#0f172a', gradient: '#1e293b', accent: '#10b981' },
@@ -24,7 +32,7 @@ export async function generateHeroImage(options: GenerateImageOptions): Promise<
 
   const colors = categoryColors[category.toLowerCase()] || categoryColors.default;
 
-  // SVGを生成
+  // SVGを生成 (Generate SVG - comment can remain or be updated)
   const svg = await satori(
     {
       type: 'div',
@@ -44,7 +52,7 @@ export async function generateHeroImage(options: GenerateImageOptions): Promise<
           position: 'relative',
         },
         children: [
-          // カテゴリバッジ
+          // カテゴリバッジ (Category badge - comment can remain or be updated)
           {
             type: 'div',
             props: {
@@ -63,7 +71,7 @@ export async function generateHeroImage(options: GenerateImageOptions): Promise<
               children: category,
             },
           },
-          // タイトル
+          // タイトル (Title - comment can remain or be updated)
           {
             type: 'div',
             props: {
@@ -78,7 +86,7 @@ export async function generateHeroImage(options: GenerateImageOptions): Promise<
               children: title,
             },
           },
-          // 装飾的な要素
+          // 装飾的な要素 (Decorative element - comment can remain or be updated)
           {
             type: 'div',
             props: {
@@ -116,17 +124,30 @@ export async function generateHeroImage(options: GenerateImageOptions): Promise<
     }
   );
 
-  // SVGをPNGに変換
+  // SVGをPNGに変換 (Convert SVG to PNG - comment can remain or be updated)
   const pngBuffer = await sharp(Buffer.from(svg))
     .png()
     .toBuffer();
 
-  // ファイル名を生成（slugをベースに）
-  const filename = `hero-${slug}.png`;
+  return pngBuffer.buffer;
+}
 
-  // public/images/hero/ ディレクトリに保存
-  const outputPath = join(process.cwd(), 'public/images/hero', filename);
+export async function generateOgpImage(options: GenerateOgpImageOptions): Promise<string> { // Renamed function
+  const { title, category, slug, width = 1200, height = 630 } = options;
+
+  const pngBuffer = await renderOgpImageBuffer({ title, category, width, height }); // Call renamed function
+
+  // ファイル名を生成（slugをベースに）(Generate filename based on slug)
+  const filename = `ogp-${slug}.png`; // Updated filename convention
+
+  // public/images/ogp/ ディレクトリに保存 (Save to public/images/ogp/ directory)
+  const outputDir = join(process.cwd(), 'public/images/ogp'); // Updated directory
+  const outputPath = join(outputDir, filename);
+
+  // Ensure the output directory exists
+  await fs.mkdir(outputDir, { recursive: true });
+
   await sharp(pngBuffer).toFile(outputPath);
 
-  return `/images/hero/${filename}`;
+  return `/images/ogp/${filename}`; // Updated return path
 }
