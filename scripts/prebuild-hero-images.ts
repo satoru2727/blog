@@ -41,7 +41,6 @@ async function prebuildHeroImages() {
     const posts = getBlogPosts();
     
     let generatedCount = 0;
-    let skippedCount = 0;
 
     for (const post of posts) {
       // 既存の画像があるかチェック
@@ -51,7 +50,6 @@ async function prebuildHeroImages() {
       
       if (existsSync(imagePath)) {
         console.log(`⏭️  スキップ: ${post.data.title} (image already exists)`);
-        skippedCount++;
         continue;
       }
 
@@ -72,7 +70,6 @@ async function prebuildHeroImages() {
 
     console.log(`\n📊 結果:`);
     console.log(`   生成: ${generatedCount} images`);
-    console.log(`   スキップ: ${skippedCount} images`);
     console.log(`✨ Hero images の事前生成が完了しました！`);
 
   } catch (error) {
