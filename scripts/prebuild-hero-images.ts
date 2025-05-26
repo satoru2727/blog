@@ -19,11 +19,10 @@ function getBlogPosts() {
     const frontmatter = frontmatterMatch[1];
     const title = frontmatter.match(/title:\s*["'](.+?)["']/)?.[1] || '';
     const category = frontmatter.match(/category:\s*["'](.+?)["']/)?.[1] || '';
-    const heroImage = frontmatter.match(/heroImage:\s*["'](.+?)["']/)?.[1];
     
     return {
       slug: file.replace('.md', ''),
-      data: { title, category, heroImage }
+      data: { title, category }
     };
   });
 }
@@ -45,19 +44,8 @@ async function prebuildHeroImages() {
     let skippedCount = 0;
 
     for (const post of posts) {
-      // heroImageが既に設定されている場合はスキップ
-      if (post.data.heroImage) {
-        console.log(`⏭️  スキップ: ${post.data.title} (heroImage already set)`);
-        skippedCount++;
-        continue;
-      }
-
       // 既存の画像があるかチェック
-      const filename = `hero-${post.data.title.toLowerCase()
-        .replace(/[^a-z0-9]/g, '-')
-        .replace(/-+/g, '-')
-        .replace(/^-|-$/g, '')
-        .substring(0, 50)}.png`;
+      const filename = `hero-${post.slug}.png`;
       
       const imagePath = join(heroDir, filename);
       
@@ -73,6 +61,7 @@ async function prebuildHeroImages() {
         await generateHeroImage({
           title: post.data.title,
           category: post.data.category,
+          slug: post.slug
         });
         generatedCount++;
         console.log(`✅ 完了: ${filename}`);
