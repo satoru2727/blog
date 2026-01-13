@@ -1,0 +1,25 @@
+---
+// src/components/TagList.astro
+// Component to display a list of tags
+// Used in blog posts and tag overview pages to provide navigation by category
+// RELEVANT FILES: src/layouts/BlogPost.astro, src/pages/tags/index.astro
+
+interface Props {
+  tags: string[];
+}
+
+const { tags } = Astro.props;
+---
+
+<div class="flex flex-wrap gap-2">
+  {
+    tags.map((tag) => (
+      <a
+        href={`/tags/${tag}`}
+        class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full hover:bg-gray-200 hover:text-gray-900 transition-colors"
+      >
+        #{tag}
+      </a>
+    ))
+  }
+</div>
