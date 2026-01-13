@@ -1,16 +1,14 @@
 ---
+// src/pages/index.astro
+// The landing page of the blog
+// Serves as the entry point for visitors
+// RELEVANT FILES: src/layouts/Layout.astro
 
+import Layout from '../layouts/Layout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Welcome to Astro">
+	<main class="container mx-auto p-4">
+		<h1 class="text-3xl font-bold text-blue-600">Welcome to Astro with Tailwind CSS</h1>
+	</main>
+</Layout>
