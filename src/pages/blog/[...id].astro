@@ -1,0 +1,24 @@
+---
+// src/pages/blog/[...id].astro
+// Dynamic route for individual blog posts
+// Fetches the post data based on the 'id' and renders it using BlogPost layout
+// RELEVANT FILES: src/content.config.ts, src/layouts/BlogPost.astro
+
+import { getCollection, render } from 'astro:content';
+import BlogPost from '../../layouts/BlogPost.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { id: post.id },
+    props: post,
+  }));
+}
+
+const post = Astro.props;
+const { Content } = await render(post);
+---
+
+<BlogPost {...post.data}>
+  <Content />
+</BlogPost>
