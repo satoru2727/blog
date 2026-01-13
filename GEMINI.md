@@ -13,10 +13,14 @@
 - **Context7**: 最新のライブラリ仕様を確認するため、コード生成や設定変更の前には必ず `use context7` を実行してください。AIの内部知識ではなく、公式の最新ドキュメントを正とします。
 
 
-- **Astro Docs MCP**: Astro特有の機能（Content Collections, Actions, Middleware等）については、Astro公式ドキュメントMCPを優先的に参照し、ベストプラクティスを適用してください。
+- **Astro Docs MCP**: Astro特有の機能（Content Collections, Actions, Middleware等）については、Astro公式ドキュメントMCPを**積極的かつ優先的に**参照し、ベストプラクティスを適用してください。
+  - 少しでも不明な点がある場合や、最新のAPI仕様を確認したい場合は、自身の知識に頼らず必ずドキュメントを検索してください。
 
 
 # MODUS OPERANDI (PULL REQUEST WORKFLOW)
+- **最新状態の維持**: 作業を開始する前には、必ず `git pull origin main` (または現在のベースブランチ) を実行し、ローカルを最新の状態にしてください。
+
+
 - **PR単位の変更**: すべての変更は機能ごとに新しいブランチ（例: `feature/xxx`, `fix/xxx`）を作成して行ってください。
 
 
@@ -24,6 +28,7 @@
 
 
 - **PR作成**: プルリクエストの作成はGitHub CLI (`gh`) を使用して行ってください。
+  - `gh pr create` の対話モードを避けるため、必ず事前に `git push -u origin <branch-name>` を実行してください。
 
 
 - **マージ禁止**: ユーザーの明示的な指示があるまで、`main` ブランチへの直接プッシュやマージは厳禁です。
@@ -56,6 +61,9 @@
 
 
 # WRITING STYLE
+- **Language**: すべてのやり取り、説明、コメント（コード内含む）は**日本語**で行ってください。
+
+
 - 各長文の後は**2つの改行（空行）**を入れてください。
 
 
