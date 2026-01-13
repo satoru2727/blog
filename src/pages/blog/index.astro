@@ -1,0 +1,49 @@
+---
+// src/pages/blog/index.astro
+// The main blog index page
+// Lists all blog posts sorted by publication date
+// RELEVANT FILES: src/layouts/Layout.astro, src/content.config.ts, src/components/TagList.astro
+
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+import TagList from '../../components/TagList.astro';
+
+const posts = (await getCollection('blog')).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<Layout title={`ブログ記事一覧 - ${SITE_TITLE}`} description={SITE_DESCRIPTION}>
+    <main class="container mx-auto p-4 max-w-4xl">
+        <header class="mb-12">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">ブログ記事一覧</h1>
+            <p class="text-lg text-gray-600">これまでのすべての投稿です。</p>
+        </header>
+
+        <section>
+            <ul class="space-y-12">
+                {posts.map((post) => (
+                    <li class="group border-b border-gray-100 pb-8 last:border-0">
+                        <article>
+                            <a href={`/blog/${post.id}/`} class="block mb-3">
+                                <time datetime={post.data.pubDate.toISOString()} class="text-sm text-gray-500 mb-1 block">
+                                    {post.data.pubDate.toLocaleDateString('ja-JP')}
+                                </time>
+                                <h2 class="text-2xl font-semibold text-gray-900 group-hover:text-blue-600 transition-colors mb-2">
+                                    {post.data.title}
+                                </h2>
+                                <p class="text-gray-600 leading-relaxed line-clamp-3">
+                                    {post.data.description}
+                                </p>
+                            </a>
+                            {post.data.tags && post.data.tags.length > 0 && (
+                                <TagList tags={post.data.tags} />
+                            )}
+                        </article>
+                    </li>
+                ))}
+            </ul>
+        </section>
+    </main>
+</Layout>

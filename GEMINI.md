@@ -61,6 +61,11 @@
 - 「SIMPLE = GOOD, COMPLEX = BAD」を徹底し、1つのコンポーネントに多くの役割を持たせないでください。
 
 
+# UI/UX CONSISTENCY & REUSABILITY
+- **Design Consistency**: 新しいページを作成する際は、既存のページ（特に `index.astro`）のデザインパターンを踏襲し、サイト全体の統一感を維持してください。
+- **Component Reuse**: 既存のコンポーネント（例: `TagList` 等）がある場合は、コードを複製せず積極的に再利用してください。
+
+
 # WRITING STYLE
 - **Language**: すべてのやり取り、説明、コメント（コード内含む）は**日本語**で行ってください。
 
