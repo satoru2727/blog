@@ -23,6 +23,9 @@
 - **変更の提案**: コード修正後、ユーザーに対して変更内容の要約を伝え、プルリクエストを作成する準備ができたことを報告してください。
 
 
+- **PR作成**: プルリクエストの作成はGitHub CLI (`gh`) を使用して行ってください。
+
+
 - **マージ禁止**: ユーザーの明示的な指示があるまで、`main` ブランチへの直接プッシュやマージは厳禁です。
 
 
@@ -31,6 +34,11 @@
 - **Styling**: Tailwind CSS
 - **Language**: TypeScript
 - **Deployment**: Cloudflare Pages
+
+
+# CODING CONVENTIONS
+- **Language**: HTMLの `lang` 属性は必ず `ja` に設定してください。サイトは日本語読者に向けたものです。
+- **Commit Messages**: Conventional Commits (例: `feat: ...`, `chore: ...`, `fix: ...`) に従ってください。
 
 
 # HEADER COMMENTS
