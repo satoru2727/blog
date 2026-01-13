@@ -2,6 +2,7 @@
 title: "Hello, Astro v5!"
 description: "Astro v5のContent Layer APIを使ってブログを構築しています。"
 pubDate: 2024-01-13
+tags: ["astro", "blog"]
 ---
 
 ## はじめての投稿
