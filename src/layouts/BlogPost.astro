@@ -5,14 +5,15 @@
 // RELEVANT FILES: src/pages/blog/[...id].astro, src/content.config.ts
 
 import Layout from './Layout.astro';
+import TagList from '../components/TagList.astro';
 import type { CollectionEntry } from 'astro:content';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, tags } = Astro.props;
 ---
 
-<Layout title={title}>
+<Layout title={title} description={description} image={heroImage}>
   <article class="container mx-auto max-w-3xl p-4">
     {heroImage && (
       <img
@@ -23,16 +24,17 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
     )}
     <div class="mb-8">
       <h1 class="text-4xl font-bold mb-2">{title}</h1>
-      <div class="text-gray-600">
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-gray-600 mb-4">
         <time datetime={pubDate.toISOString()}>
           {pubDate.toLocaleDateString('ja-JP')}
         </time>
         {updatedDate && (
-          <span class="ml-4">
+          <span>
             (更新日: <time datetime={updatedDate.toISOString()}>{updatedDate.toLocaleDateString('ja-JP')}</time>)
           </span>
         )}
       </div>
+      {tags && tags.length > 0 && <TagList tags={tags} />}
     </div>
     <div class="prose prose-lg max-w-none">
       <slot />

@@ -1,0 +1,21 @@
+---
+// src/components/Footer.astro
+// Global footer component
+// Displays copyright information and secondary links
+// RELEVANT FILES: src/layouts/Layout.astro
+
+const today = new Date();
+---
+
+<footer class="bg-gray-50 border-t border-gray-200 mt-auto">
+  <div class="container mx-auto px-4 py-8 text-center text-sm text-gray-500">
+    <p>
+      &copy; {today.getFullYear()} My Astro Blog. All rights reserved.
+    </p>
+    <div class="mt-4 flex justify-center space-x-4">
+      <!-- Social links placeholder -->
+      <a href="#" class="hover:text-gray-900 transition-colors">Twitter</a>
+      <a href="#" class="hover:text-gray-900 transition-colors">GitHub</a>
+    </div>
+  </div>
+</footer>
