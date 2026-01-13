@@ -39,6 +39,7 @@
 - **Styling**: Tailwind CSS
 - **Language**: TypeScript
 - **Deployment**: Cloudflare Pages
+- **Package Manager** : pnpm
 
 
 # CODING CONVENTIONS
