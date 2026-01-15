@@ -62,6 +62,7 @@ This repo uses Husky + lint-staged.
 4. Enable auto-merge (squash)
    - Turn on “Allow auto-merge” in GitHub repo settings
    - Add label `automerge` to the PR (workflow enables auto-merge)
+   - Merging is gated by required checks (e.g. `ci`, `Cloudflare Pages`)
 
 ### Review (static checks)
 
