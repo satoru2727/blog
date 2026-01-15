@@ -4,8 +4,9 @@
 // Formats the blog post metadata and provides a container for the content
 // RELEVANT FILES: src/pages/blog/[...id].astro, src/content.config.ts
 
-import type { CollectionEntry } from 'astro:content';
 import type { MarkdownHeading } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
 import TagList from '../components/TagList.astro';
 import Layout from './Layout.astro';
 
@@ -25,7 +26,7 @@ const { title, description, pubDate, updatedDate, heroImage, tags, category, hea
 >
 	<article class="container mx-auto max-w-3xl p-4">
 		{heroImage && (
-			<img
+			<Image
 				src={heroImage}
 				alt=""
 				class="mb-8 h-auto w-full rounded-none border border-[color:var(--c-border)]"

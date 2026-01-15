@@ -1,0 +1,33 @@
+backend:
+  name: github
+  repo: satoru2727/blog
+  branch: master
+  base_url: https://satoru.work
+  auth_endpoint: api/auth/github
+
+media_folder: src/assets/uploads
+public_folder: ../../assets/uploads
+
+site_url: https://satoru.work
+
+display_url: https://satoru.work
+
+collections:
+  - name: blog
+    label: Blog
+    label_singular: Post
+    folder: src/content/blog
+    create: true
+    extension: md
+    format: frontmatter
+    slug: "{{slug}}"
+    preview_path: /blog/{{slug}}
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Description, name: description, widget: text }
+      - { label: Published, name: pubDate, widget: datetime, format: "YYYY-MM-DD" }
+      - { label: Updated, name: updatedDate, widget: datetime, format: "YYYY-MM-DD", required: false }
+      - { label: Hero Image, name: heroImage, widget: image, required: false }
+      - { label: Category, name: category, widget: string, required: false }
+      - { label: Tags, name: tags, widget: list, required: false }
+      - { label: Body, name: body, widget: markdown }

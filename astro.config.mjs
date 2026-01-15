@@ -6,6 +6,10 @@ import tailwindcss from '@tailwindcss/vite';
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://satoru.work',
+	image: {
+		layout: 'constrained',
+		responsiveStyles: true,
+	},
 	vite: {
 		plugins: [tailwindcss()],
 	},
