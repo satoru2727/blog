@@ -4,9 +4,9 @@
 // Allows users to discover content by browsing through available categories
 // RELEVANT FILES: src/layouts/Layout.astro, src/components/TagList.astro
 
-import Layout from '../../layouts/Layout.astro';
-import TagList from '../../components/TagList.astro';
 import { getCollection } from 'astro:content';
+import TagList from '../../components/TagList.astro';
+import Layout from '../../layouts/Layout.astro';
 
 const posts = await getCollection('blog');
 const tags = [...new Set(posts.flatMap((post) => post.data.tags || []))].sort();

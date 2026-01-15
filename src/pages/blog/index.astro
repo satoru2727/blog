@@ -4,10 +4,10 @@
 // Lists all blog posts sorted by publication date
 // RELEVANT FILES: src/layouts/Layout.astro, src/content.config.ts, src/components/TagList.astro
 
-import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 import TagList from '../../components/TagList.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+import Layout from '../../layouts/Layout.astro';
 
 const posts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),

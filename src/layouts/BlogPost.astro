@@ -4,10 +4,10 @@
 // Formats the blog post metadata and provides a container for the content
 // RELEVANT FILES: src/pages/blog/[...id].astro, src/content.config.ts
 
-import Layout from './Layout.astro';
-import TagList from '../components/TagList.astro';
-import type { MarkdownHeading } from 'astro';
 import type { CollectionEntry } from 'astro:content';
+import type { MarkdownHeading } from 'astro';
+import TagList from '../components/TagList.astro';
+import Layout from './Layout.astro';
 
 type Props = CollectionEntry<'blog'>['data'] & {
 	category?: string;
@@ -18,7 +18,7 @@ const { title, description, pubDate, updatedDate, heroImage, tags, category, hea
 	Astro.props;
 ---
 
-<Layout title={title} description={description} image={heroImage}>
+<Layout title={title} description={description} image={`/og/${Astro.url.pathname.replace(/^\/blog\//, '').replace(/\/$/, '')}.png`}>
   <article class="container mx-auto max-w-3xl p-4">
     {heroImage && (
       <img
