@@ -29,14 +29,55 @@ Any static assets, like images, can be placed in the `public/` directory.
 
 All commands are run from the root of the project, from a terminal:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+| Command | Action |
+| :-- | :-- |
+| `pnpm install` | Install dependencies |
+| `pnpm dev` | Start dev server (`http://localhost:4321`) |
+| `pnpm check` | Astro + TypeScript diagnostics |
+| `pnpm lint` | Biome linter (non-formatting) |
+| `pnpm build` | Build production site to `./dist/` |
+| `pnpm preview` | Preview the production build |
+| `pnpm pw:install` | Install Playwright browsers (Chromium) |
+| `pnpm pw:install-deps` | Install OS deps for Playwright (Linux; may require `sudo`) |
+| `pnpm test:a11y` | Build + run Playwright a11y smoke tests |
+
+## 🧰 Developer Workflow
+
+### pre-commit
+
+This repo uses Husky + lint-staged.
+
+- Install hooks: `pnpm install` (runs `prepare`)
+- Run manually: `pnpm lint-staged`
+
+### PR flow (recommended)
+
+1. Create a branch
+   - `git switch -c feat/something`
+2. Local checks
+   - `pnpm lint && pnpm check && pnpm build && pnpm test:a11y`
+3. Push + open PR
+   - `git push -u origin HEAD`
+   - `gh pr create --fill --draft`
+4. Enable auto-merge (squash)
+   - Turn on “Allow auto-merge” in GitHub repo settings
+   - Add label `automerge` to the PR (workflow enables auto-merge)
+
+### Review (static checks)
+
+This repo treats CI checks as the “review”. Ensure all checks are green before merging.
+
+### OpenCode (opencode)
+
+OpenCode reads `opencode.json` as project configuration.
+This repo enables the `astro_docs` MCP server for Astro documentation.
+
+### GitHub CLI (gh)
+
+- Login / verify: `gh auth login`, `gh auth status`
+- Create PR: `gh pr create --fill --draft`
+- Enable auto-merge: `gh pr merge --auto --squash --delete-branch`
+- View PRs: `gh pr status`, `gh pr list`
 
 ## 👀 Want to learn more?
 
