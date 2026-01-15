@@ -21,8 +21,12 @@ function getEnvString(env: Record<string, unknown>, key: string): string {
 
 type OnRequestContext = {
 	request: Request;
-	env: Record<string, unknown>;
+	env?: Record<string, unknown>;
 };
+
+function readEnvValue(env: Record<string, unknown> | undefined, key: string): string {
+	return getEnvString(env ?? globalThis.process?.env ?? {}, key);
+}
 
 function htmlResponse(body: string, headers?: HeadersInit): Response {
 	return new Response(body, {
@@ -36,8 +40,8 @@ function htmlResponse(body: string, headers?: HeadersInit): Response {
 }
 
 export const onRequest = async ({ request, env }: OnRequestContext): Promise<Response> => {
-	const clientId = getEnvString(env, 'GITHUB_CLIENT_ID');
-	const clientSecret = getEnvString(env, 'GITHUB_CLIENT_SECRET');
+	const clientId = readEnvValue(env, 'GITHUB_CLIENT_ID');
+	const clientSecret = readEnvValue(env, 'GITHUB_CLIENT_SECRET');
 
 	const url = new URL(request.url);
 	const code = url.searchParams.get('code');
