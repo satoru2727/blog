@@ -27,36 +27,37 @@ const { posts } = Astro.props;
 ---
 
 <Layout title={`タグ: ${tag}`} description={`「${tag}」タグが付いた記事の一覧です。`}>
-  <div class="max-w-3xl mx-auto">
-    <div class="mb-8">
-      <h1 class="text-3xl font-bold">
-        タグ: <span class="text-blue-600">#{tag}</span>
-      </h1>
-      <p class="text-gray-600 mt-2">{posts.length} 件の記事が見つかりました</p>
-    </div>
+	<main class="container mx-auto max-w-3xl p-4">
+		<div class="mb-8">
+			<h1 class="text-3xl font-bold text-[color:var(--c-text)]">
+				タグ: <span class="text-[color:var(--c-link)]">#{tag}</span>
+			</h1>
+			<p class="mt-2 text-[color:var(--c-muted)]">{posts.length} 件の記事が見つかりました</p>
+		</div>
 
-    <ul class="space-y-8">
-      {
-        posts.map((post) => (
-          <li class="group">
-            <a href={`/blog/${post.id}/`} class="block">
-              <time datetime={post.data.pubDate.toISOString()} class="text-sm text-gray-500">
-                {post.data.pubDate.toLocaleDateString('ja-JP')}
-              </time>
-              <h2 class="text-2xl font-bold group-hover:text-blue-600 transition-colors">
-                {post.data.title}
-              </h2>
-              <p class="text-gray-600 mt-2 line-clamp-2">
-                {post.data.description}
-              </p>
-            </a>
-          </li>
-        ))
-      }
-    </ul>
+		<section class="rounded-[var(--radius-md)] border border-[color:var(--c-border)] bg-[color:var(--c-surface)] p-6">
+			<ul class="space-y-8">
+				{posts.map((post) => (
+					<li class="group">
+						<a
+							href={`/blog/${post.id}/`}
+							class="block rounded-[var(--radius-md)] p-3 transition-colors hover:bg-[color:var(--c-surface-2)]"
+						>
+							<time datetime={post.data.pubDate.toISOString()} class="text-sm text-[color:var(--c-muted)]">
+								{post.data.pubDate.toLocaleDateString('ja-JP')}
+							</time>
+							<h2 class="text-2xl font-bold text-[color:var(--c-text)]">{post.data.title}</h2>
+							<p class="mt-2 line-clamp-2 text-[color:var(--c-muted)]">
+								{post.data.description}
+							</p>
+						</a>
+					</li>
+				))}
+			</ul>
+		</section>
 
-    <div class="mt-12 pt-8 border-t">
-      <a href="/tags" class="text-blue-600 hover:underline">← すべてのタグを見る</a>
-    </div>
-  </div>
+		<div class="mt-12">
+			<a href="/tags">← すべてのタグを見る</a>
+		</div>
+	</main>
 </Layout>

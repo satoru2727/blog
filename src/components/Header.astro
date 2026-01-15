@@ -6,23 +6,23 @@
 
 ---
 
-<header class="border-b border-gray-200 bg-white">
-  <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-    <a href="/" class="text-xl font-bold text-gray-900 hover:text-gray-700">
-      My Astro Blog
-    </a>
-    <nav>
-      <ul class="flex space-x-6 text-sm font-medium text-gray-600">
-        <li>
-          <a href="/" class="hover:text-gray-900 transition-colors">Home</a>
-        </li>
-        <li>
-          <a href="/blog" class="hover:text-gray-900 transition-colors">Blog</a>
-        </li>
-        <li>
-          <a href="/tags" class="hover:text-gray-900 transition-colors">Tags</a>
-        </li>
-      </ul>
-    </nav>
-  </div>
+<header class="border-b border-[color:var(--c-border)] bg-[color:var(--c-bg)]">
+	<div class="container mx-auto flex items-center justify-between px-4 py-4">
+		<a href="/" class="text-xl font-bold text-[color:var(--c-text)]">
+			My Astro Blog
+		</a>
+		<nav>
+			<ul class="flex space-x-6 text-sm font-medium text-[color:var(--c-muted)]">
+				<li>
+					<a href="/" class="transition-colors hover:text-[color:var(--c-text)]">Home</a>
+				</li>
+				<li>
+					<a href="/blog" class="transition-colors hover:text-[color:var(--c-text)]">Blog</a>
+				</li>
+				<li>
+					<a href="/tags" class="transition-colors hover:text-[color:var(--c-text)]">Tags</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
 </header>

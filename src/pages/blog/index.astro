@@ -15,44 +15,50 @@ const posts = (await getCollection('blog')).sort(
 ---
 
 <Layout title={`ブログ記事一覧 - ${SITE_TITLE}`} description={SITE_DESCRIPTION}>
-    <main class="container mx-auto p-4 max-w-4xl">
-        <header class="mb-12 font-[var(--font-sans-heading)]">
-            <h1 class="text-4xl font-bold text-gray-900 mb-4 font-[var(--font-sans-heading)]">ブログ記事一覧</h1>
-            <p class="text-lg text-gray-600">これまでのすべての投稿です。</p>
-        </header>
+	<main class="container mx-auto max-w-4xl p-4">
+		<header class="mb-12 font-[var(--font-sans-heading)]">
+			<h1 class="mb-4 text-4xl font-bold text-[color:var(--c-text)] font-[var(--font-sans-heading)]">
+				ブログ記事一覧
+			</h1>
+			<p class="text-lg text-[color:var(--c-muted)]">これまでのすべての投稿です。</p>
+		</header>
 
-        <section>
-            <ul class="space-y-12">
-                {posts.map((post) => (
-                    <li class="group border-b border-gray-100 pb-8 last:border-0">
-                        <article>
-                            <a href={`/blog/${post.id}/`} class="block mb-3">
-                                <time datetime={post.data.pubDate.toISOString()} class="text-sm text-gray-500 mb-1 block">
-                                    {post.data.pubDate.toLocaleDateString('ja-JP')}
-                                </time>
-                                <h2 class="text-2xl font-semibold text-gray-900 group-hover:text-blue-600 transition-colors mb-2">
-                                    {post.data.title}
-                                </h2>
-                                <p class="text-gray-600 leading-relaxed line-clamp-3">
-                                    {post.data.description}
-                                </p>
-                            </a>
-                            {post.data.category && (
-                                <div class="mt-2">
-                                    <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full">
-                                        <a href={`/categories/${encodeURIComponent(post.data.category)}`} class="hover:underline">
-                                            {post.data.category}
-                                        </a>
-                                    </span>
-                                </div>
-                            )}
-                            {post.data.tags && post.data.tags.length > 0 && (
-                                <TagList tags={post.data.tags} />
-                            )}
-                        </article>
-                    </li>
-                ))}
-            </ul>
-        </section>
-    </main>
+		<section class="rounded-[var(--radius-md)] border border-[color:var(--c-border)] bg-[color:var(--c-surface)] p-6">
+			<ul class="space-y-10">
+				{posts.map((post) => (
+					<li class="group border-b border-[color:var(--c-border)] pb-8 last:border-0">
+						<article>
+							<a
+								href={`/blog/${post.id}/`}
+								class="-mx-3 block rounded-[var(--radius-md)] px-3 pb-3 transition-colors hover:bg-[color:var(--c-surface-2)]"
+							>
+								<time
+									datetime={post.data.pubDate.toISOString()}
+									class="mb-1 block text-sm text-[color:var(--c-muted)]"
+								>
+									{post.data.pubDate.toLocaleDateString('ja-JP')}
+								</time>
+								<h2 class="mb-2 text-2xl font-semibold text-[color:var(--c-text)]">
+									{post.data.title}
+								</h2>
+								<p class="line-clamp-3 leading-relaxed text-[color:var(--c-muted)]">
+									{post.data.description}
+								</p>
+							</a>
+							{post.data.category && (
+								<div class="mt-2">
+									<span class="inline-flex items-center rounded-full border border-[color:var(--c-border)] bg-[color:var(--c-surface-2)] px-2 py-1 text-xs text-[color:var(--c-muted)]">
+										<a href={`/categories/${encodeURIComponent(post.data.category)}`}>
+											{post.data.category}
+										</a>
+									</span>
+								</div>
+							)}
+							{post.data.tags && post.data.tags.length > 0 && <TagList tags={post.data.tags} />}
+						</article>
+					</li>
+				))}
+			</ul>
+		</section>
+	</main>
 </Layout>

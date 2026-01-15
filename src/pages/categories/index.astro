@@ -14,28 +14,30 @@ const categories = [
 ---
 
 <Layout title="カテゴリー一覧" description="ブログで使用されているすべてのカテゴリーの一覧です。">
-  <div class="max-w-3xl mx-auto">
-    <h1 class="text-3xl font-bold mb-8 font-[var(--font-sans-heading)]">カテゴリー一覧</h1>
-    
-    {categories.length > 0 ? (
-      <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
-        <div class="flex flex-wrap gap-2">
-          {categories.map((category) => (
-            <a
-              href={`/categories/${encodeURIComponent(category)}`}
-              class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full hover:bg-gray-200 hover:text-gray-900 transition-colors"
-            >
-              {category}
-            </a>
-          ))}
-        </div>
-      </div>
-    ) : (
-      <p class="text-gray-500">カテゴリーがまだありません。</p>
-    )}
-    
-    <div class="mt-12">
-      <a href="/" class="text-blue-600 hover:underline">← ホームに戻る</a>
-    </div>
-  </div>
+	<main class="container mx-auto max-w-3xl p-4">
+		<h1 class="mb-8 text-3xl font-bold text-[color:var(--c-text)] font-[var(--font-sans-heading)]">
+			カテゴリー一覧
+		</h1>
+
+		{categories.length > 0 ? (
+			<section class="rounded-[var(--radius-md)] border border-[color:var(--c-border)] bg-[color:var(--c-surface)] p-6">
+				<div class="flex flex-wrap gap-2">
+					{categories.map((category) => (
+						<a
+							href={`/categories/${encodeURIComponent(category)}`}
+							class="inline-flex items-center rounded-full border border-[color:var(--c-border)] bg-[color:var(--c-surface-2)] px-3 py-1 text-sm text-[color:var(--c-text)]"
+						>
+							{category}
+						</a>
+					))}
+				</div>
+			</section>
+		) : (
+			<p class="text-[color:var(--c-muted)]">カテゴリーがまだありません。</p>
+		)}
+
+		<div class="mt-12">
+			<a href="/">← ホームに戻る</a>
+		</div>
+	</main>
 </Layout>
