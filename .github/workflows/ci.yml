@@ -40,11 +40,8 @@ jobs:
       - name: Build
         run: pnpm build
 
-      - name: Install Playwright OS dependencies
-        run: pnpm pw:install-deps
-
-      - name: Install Playwright browsers
-        run: pnpm pw:install
+      - name: Install Playwright (Chromium + OS deps)
+        run: pnpm exec playwright install --with-deps chromium
 
       - name: a11y tests
         run: pnpm test:a11y
