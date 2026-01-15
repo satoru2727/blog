@@ -97,6 +97,13 @@ CIでは `playwright install --with-deps chromium` を使って OS依存 + Chrom
   - PR に label `automerge` を付けると auto-merge（squash）が有効化される
   - マージは required checks（例: `ci`, `Cloudflare Pages`）が green になるまで行われない
 
+### Conflict prevention（再発防止）
+
+- 長生きする PR ブランチは、`package.json` / `pnpm-lock.yaml` / `src/styles/global.css` が衝突しやすい。
+  - こまめに `master` を取り込む（例: `git fetch origin master && git merge origin/master`）。
+- `pnpm-lock.yaml` は手で直さない。
+  - 競合解消後は `pnpm install --lockfile-only` で必ず再生成して整合性を取る。
+
 ## Repo Conventions
 
 ### General

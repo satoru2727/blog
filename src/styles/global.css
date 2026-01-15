@@ -1,1 +1,55 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+	--font-sans: "BIZ UDPGothic", "BIZ UDGothic", ui-sans-serif, system-ui, sans-serif,
+		"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	--font-heading: "BIZ UDGothic", "BIZ UDPGothic", ui-sans-serif, system-ui, sans-serif,
+		"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	--font-sans-heading: var(--font-heading);
+	--font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+	--font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+		"Courier New", monospace;
+
+	--text-base: 1rem;
+	--leading-relaxed: 1.65;
+
+	--c-bg: oklch(0.985 0.01 85);
+	--c-surface: oklch(0.995 0.005 85);
+	--c-surface-2: oklch(0.97 0.01 85);
+	--c-text: oklch(0.2 0.02 80);
+	--c-muted: oklch(0.5 0.02 80);
+	--c-border: oklch(0.88 0.01 85);
+
+	--c-accent: oklch(0.62 0.16 35);
+	--c-link: var(--c-accent);
+
+	--radius-md: 0.5rem;
+	--shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+@media (prefers-color-scheme: dark) {
+	@theme {
+		--c-bg: oklch(0.17 0.02 80);
+		--c-surface: oklch(0.21 0.02 80);
+		--c-surface-2: oklch(0.26 0.02 80);
+		--c-text: oklch(0.93 0.01 80);
+		--c-muted: oklch(0.72 0.01 80);
+		--c-border: oklch(0.35 0.02 80);
+
+		--c-accent: oklch(0.72 0.14 35);
+	}
+}
+
+:root {
+	color: var(--c-text);
+	background: var(--c-bg);
+	text-decoration-color: color-mix(in oklab, currentColor 40%, transparent);
+}
+
+a {
+	color: var(--c-link);
+	text-decoration: underline;
+	text-underline-offset: 0.18em;
+	text-decoration-thickness: 0.08em;
+}

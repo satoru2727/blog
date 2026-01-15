@@ -12,14 +12,12 @@ const { tags } = Astro.props;
 ---
 
 <div class="flex flex-wrap gap-2">
-  {
-    tags.map((tag) => (
-      <a
-        href={`/tags/${tag}`}
-        class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full hover:bg-gray-200 hover:text-gray-900 transition-colors"
-      >
-        #{tag}
-      </a>
-    ))
-  }
+	{tags.map((tag) => (
+		<a
+			href={`/tags/${tag}`}
+			class="inline-flex items-center rounded-full border border-[color:var(--c-border)] bg-[color:var(--c-surface-2)] px-3 py-1 text-sm text-[color:var(--c-text)]"
+		>
+			#{tag}
+		</a>
+	))}
 </div>

@@ -20,6 +20,7 @@
 	"dependencies": {
 		"@astrojs/rss": "^4.0.14",
 		"@resvg/resvg-js": "^2.6.2",
+		"@tailwindcss/typography": "^0.5.19",
 		"@tailwindcss/vite": "^4.1.18",
 		"astro": "^5.16.9",
 		"satori": "^0.18.3",
