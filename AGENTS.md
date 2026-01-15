@@ -15,6 +15,7 @@
 - Package manager: `pnpm`（`pnpm-lock.yaml`）
 - Module system: ESM（`package.json#type = module`）
 - Node: `24.12.0`（`package.json#volta`）
+- Site URL: `https://satoru.work`（`astro.config.mjs#site`）
 
 Key paths:
 - Routes: `src/pages/`
@@ -23,6 +24,11 @@ Key paths:
 - Content: `src/content/` + `src/content.config.ts`
 - Styles: `src/styles/global.css`
 - Tests (Playwright): `tests/`
+
+Key routes:
+- RSS feed: `/rss.xml`（`src/pages/rss.xml.ts`）
+- Tags: `/tags`, `/tags/[tag]`
+- Categories: `/categories`, `/categories/[category]`
 
 ## Commands (Build / Lint / Test)
 
@@ -133,6 +139,9 @@ CIでは `playwright install --with-deps chromium` を使って OS依存 + Chrom
 
 - 収集設定: `src/content.config.ts`（`defineCollection` + `glob` loader`）
 - schema は `z` を用いて厳密に（例: `pubDate` は `z.coerce.date()`）。
+- Blog frontmatter fields:
+  - required: `title`, `description`, `pubDate`
+  - optional: `updatedDate`, `heroImage`, `category`, `tags`
 
 ### Formatting
 
