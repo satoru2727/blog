@@ -14,7 +14,7 @@ const tags = [...new Set(posts.flatMap((post) => post.data.tags || []))].sort();
 
 <Layout title="タグ一覧" description="ブログで使用されているすべてのタグの一覧です。">
   <div class="max-w-3xl mx-auto">
-    <h1 class="text-3xl font-bold mb-8">タグ一覧</h1>
+    <h1 class="text-3xl font-bold mb-8 font-[var(--font-sans-heading)]">タグ一覧</h1>
     
     {tags.length > 0 ? (
       <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">

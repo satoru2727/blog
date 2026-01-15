@@ -16,8 +16,8 @@ const posts = (await getCollection('blog')).sort(
 
 <Layout title={`ブログ記事一覧 - ${SITE_TITLE}`} description={SITE_DESCRIPTION}>
     <main class="container mx-auto p-4 max-w-4xl">
-        <header class="mb-12">
-            <h1 class="text-4xl font-bold text-gray-900 mb-4">ブログ記事一覧</h1>
+        <header class="mb-12 font-[var(--font-sans-heading)]">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4 font-[var(--font-sans-heading)]">ブログ記事一覧</h1>
             <p class="text-lg text-gray-600">これまでのすべての投稿です。</p>
         </header>
 
