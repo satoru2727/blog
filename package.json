@@ -24,6 +24,7 @@
 		"@tailwindcss/vite": "^4.1.18",
 		"astro": "^5.16.9",
 		"satori": "^0.18.3",
+		"sharp": "^0.34.5",
 		"tailwindcss": "^4.1.18"
 	},
 	"volta": {
