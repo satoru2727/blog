@@ -18,7 +18,11 @@ const { title, description, pubDate, updatedDate, heroImage, tags, category, hea
 	Astro.props;
 ---
 
-<Layout title={title} description={description} image={`/og/${Astro.url.pathname.replace(/^\/blog\//, '').replace(/\/$/, '')}.png`}>
+<Layout
+	title={title}
+	description={description}
+	image={`/og/${Astro.url.pathname.replace(/^\/blog\//, '').replace(/\/$/, '')}.png`}
+>
 	<article class="container mx-auto max-w-3xl p-4">
 		{heroImage && (
 			<img
@@ -75,4 +79,5 @@ const { title, description, pubDate, updatedDate, heroImage, tags, category, hea
 			<a href="/">← ホームに戻る</a>
 		</div>
 	</article>
+</Layout>
 </Layout>
