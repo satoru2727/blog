@@ -1,0 +1,41 @@
+---
+// src/pages/categories/index.astro
+// Page that displays a list of all categories used in the blog
+// Allows users to discover content by browsing through available categories
+// RELEVANT FILES: src/layouts/Layout.astro, src/components/TagList.astro
+
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blog');
+const categories = [
+	...new Set(posts.flatMap((post) => (post.data.category ? [post.data.category] : []))),
+].sort();
+---
+
+<Layout title="カテゴリー一覧" description="ブログで使用されているすべてのカテゴリーの一覧です。">
+  <div class="max-w-3xl mx-auto">
+    <h1 class="text-3xl font-bold mb-8">カテゴリー一覧</h1>
+    
+    {categories.length > 0 ? (
+      <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+        <div class="flex flex-wrap gap-2">
+          {categories.map((category) => (
+            <a
+              href={`/categories/${encodeURIComponent(category)}`}
+              class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full hover:bg-gray-200 hover:text-gray-900 transition-colors"
+            >
+              {category}
+            </a>
+          ))}
+        </div>
+      </div>
+    ) : (
+      <p class="text-gray-500">カテゴリーがまだありません。</p>
+    )}
+    
+    <div class="mt-12">
+      <a href="/" class="text-blue-600 hover:underline">← ホームに戻る</a>
+    </div>
+  </div>
+</Layout>
