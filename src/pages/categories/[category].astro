@@ -4,8 +4,8 @@
 // Helps users find related content efficiently
 // RELEVANT FILES: src/layouts/Layout.astro, src/content.config.ts
 
-import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
 
 export async function getStaticPaths() {
 	const allPosts = await getCollection('blog');

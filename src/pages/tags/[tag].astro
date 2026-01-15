@@ -4,22 +4,22 @@
 // Helps users find related content efficiently
 // RELEVANT FILES: src/layouts/Layout.astro, src/content.config.ts
 
-import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
 
 export async function getStaticPaths() {
-  const allPosts = await getCollection('blog');
-  const uniqueTags = [...new Set(allPosts.flatMap((post) => post.data.tags || []))];
+	const allPosts = await getCollection('blog');
+	const uniqueTags = [...new Set(allPosts.flatMap((post) => post.data.tags || []))];
 
-  return uniqueTags.map((tag) => {
-    const filteredPosts = allPosts
-      .filter((post) => post.data.tags?.includes(tag))
-      .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-    return {
-      params: { tag },
-      props: { posts: filteredPosts },
-    };
-  });
+	return uniqueTags.map((tag) => {
+		const filteredPosts = allPosts
+			.filter((post) => post.data.tags?.includes(tag))
+			.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+		return {
+			params: { tag },
+			props: { posts: filteredPosts },
+		};
+	});
 }
 
 const { tag } = Astro.params;
