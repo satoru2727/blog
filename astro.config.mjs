@@ -10,6 +10,10 @@ export default defineConfig({
 		layout: 'constrained',
 		responsiveStyles: true,
 	},
+	integrations: [
+		(await import('@playform/inline')).default(),
+		(await import('@playform/compress')).default(),
+	],
 	vite: {
 		plugins: [tailwindcss()],
 	},
